@@ -29,4 +29,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     while True:
         conn, addr = s.accept()
 
-        start_new_thread(ConnectPlayer(s, conn, players))
+        start_new_thread(ConnectPlayer, (s, conn, players))

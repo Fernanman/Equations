@@ -1,13 +1,14 @@
 import socket
+import pickle
 
 HOST = "66.228.47.180"
 PORT = 65432
 
-while True:
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((HOST, PORT))
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((HOST, PORT))
+    while True:
         x = input()
-        s.sendall(x)
-        data = s.recv(1024)
+        s.sendall(pickle.dumps(x))
+        data = pickle.loads(s.recv(2048))
 
-        print('Recieved', repr(data))
+        print('Recieved', data)

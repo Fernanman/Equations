@@ -21,9 +21,12 @@ def ConnectPlayer(socket, conn, players):
             conn.sendall(pickle.dumps(data[::-1]))
             
 print("Ready to accept Connections.")
+
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen()
-    conn, addr = s.accept()
 
-    start_new_thread(ConnectPlayer(s, conn, players))
+    while True:
+        conn, addr = s.accept()
+
+        start_new_thread(ConnectPlayer(s, conn, players))

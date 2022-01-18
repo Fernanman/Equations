@@ -1,13 +1,13 @@
-import pygame
-from Network import Network
+import socket
 
-def main():
-    run = True
-    n = Network()
+HOST = "66.228.47.180"
+PORT = 65432
 
-    while run:
+while True:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((HOST, PORT))
         x = input()
-        n.send(x)
+        s.sendall(x)
+        data = s.recv(1024)
 
-if __name__ == "__main__":
-    main()
+        print('Recieved', repr(data))

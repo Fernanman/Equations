@@ -16,7 +16,7 @@ def ConnectPlayer(socket, conn, players):
         print('Connected by', addr)
 
         while True:
-            data = pickle.loads(conn.recv(1024))
+            data = pickle.loads(conn.recv(2048))
             print("Received:", data, "\nSending:", data[::-1])
             conn.sendall(pickle.dumps(data))
             

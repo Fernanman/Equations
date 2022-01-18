@@ -18,7 +18,7 @@ def ConnectPlayer(socket, conn, players):
         while True:
             data = pickle.loads(conn.recv(1024))
             print("Received:", data, "\nSending:", data[::-1])
-            conn.sendall(pickle.loads(data))
+            conn.sendall(pickle.dumps(data))
             
 print("Ready to accept Connections.")
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

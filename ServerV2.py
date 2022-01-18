@@ -5,10 +5,10 @@ import pickle
 HOST = ''
 PORT = 65432
 
-global players
 players = 0
 
-def ConnectPlayer(socket, conn, players):
+def ConnectPlayer(conn):
+    global players
     players += 1
 
     with conn:
@@ -29,4 +29,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     while True:
         conn, addr = s.accept()
 
-        start_new_thread(ConnectPlayer, (s, conn, players))
+        start_new_thread(ConnectPlayer, (conn))

@@ -16,15 +16,13 @@ def ConnectPlayer(socket, conn, players):
         print('Connected by', addr)
 
         while True:
-            data = conn.recv(1024)
-            conn.sendall(data)
+            data = pickle.loads(conn.recv(1024))
+            conn.sendall(pickle.loads(data))
             
 print("Ready to accept Connections.")
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen()
     conn, addr = s.accept()
-
-    
 
     start_new_thread(ConnectPlayer(s, conn, players))
